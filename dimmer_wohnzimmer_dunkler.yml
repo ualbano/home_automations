@@ -1,0 +1,20 @@
+alias: Wenn Wohnzimmertaster dunkler
+description: ""
+triggers:
+  - domain: mqtt
+    device_id: 04cd95a27a2b6cf0cd5d74dd29e14376
+    type: action
+    subtype: brightness_down_click
+    trigger: device
+conditions:
+  - condition: state
+    entity_id: light.wohnzimmerlampen
+    state: "on"
+actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.wohnzimmerlampen
+mode: single

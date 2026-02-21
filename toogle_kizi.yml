@@ -1,0 +1,46 @@
+alias: "Wenn Kinderzimmer toggle "
+description: ""
+triggers:
+  - domain: mqtt
+    device_id: d13872354722bda434958927320be804
+    type: action
+    subtype: toggle
+    trigger: device
+conditions: []
+actions:
+  - if:
+      - condition: device
+        type: is_off
+        device_id: 1918b22b3f9722aab26534b52e0d10f3
+        entity_id: ab83e5c473539fe0809b62792fbc7cbf
+        domain: light
+    then:
+      - action: light.turn_on
+        metadata: {}
+        target:
+          entity_id: light.kinderzimmer_stehlampe
+        data:
+          brightness_pct: 1
+    else:
+      - action: light.turn_off
+        metadata: {}
+        target:
+          entity_id: light.kinderzimmer_stehlampe
+        data:
+          transition: 2
+  - wait_for_trigger:
+      - domain: mqtt
+        device_id: d13872354722bda434958927320be804
+        type: action
+        subtype: toggle
+        trigger: device
+    timeout:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+    continue_on_timeout: false
+  - action: script.kizi_nachlicht
+    metadata: {}
+    data: {}
+mode: single

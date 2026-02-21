@@ -1,0 +1,15 @@
+alias: Wenn Kinderzimmertaster dunkler
+description: ""
+triggers:
+  - domain: mqtt
+    device_id: d13872354722bda434958927320be804
+    type: action
+    subtype: brightness_down_click
+    trigger: device
+conditions: []
+actions:
+  - device_id: 1918b22b3f9722aab26534b52e0d10f3
+    domain: light
+    entity_id: ab83e5c473539fe0809b62792fbc7cbf
+    type: brightness_decrease
+mode: single
